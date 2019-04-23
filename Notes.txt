@@ -3,3 +3,6 @@ mongo express-mongo-api< booksJson.js
 
 Start mongo:
 mongoDb
+
+Put replaces one resource with another
+Patch replaces one part of the resource
