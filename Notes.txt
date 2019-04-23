@@ -1,0 +1,5 @@
+Data import instructions:
+mongo express-mongo-api< booksJson.js
+
+Start mongo:
+mongoDb
