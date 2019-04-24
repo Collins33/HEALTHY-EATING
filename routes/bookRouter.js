@@ -1,29 +1,14 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
 const express = require('express');
-
+const booksController = require('../controllers/booksController');
 
 function routes(Book) {
   const bookRouter = express.Router();
+  const controller = booksController(Book);
   bookRouter.route('/books')
-    .post((req, res) => {
-      const book = new Book(req.body);
-      // save book to database
-      book.save();
-      return res.status(201).json(book);
-    })
-    .get((req, res) => {
-    // filter with a query string
-      const { query } = req;
-      // query the mongo db to get books
-      Book.find(query, (err, books) => {
-        if (err) {
-          return res.send(err);
-        }
-        return res.json(books);
-      });
-    });
-
+    .post(controller.post)
+    .get(controller.get);
   // add the middleware
   // check if the book exists
   bookRouter.use('/books/:bookId', (req, res, next) => {
