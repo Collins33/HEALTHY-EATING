@@ -5,8 +5,13 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // connect to mongodb
-const db = mongoose.connect('mongodb://localhost/express-mongo-api');
-// const bookRouter = express.Router();
+if (process.env.ENV === 'Test') {
+  console.log('We are testing');
+  const db = mongoose.connect('mongodb://localhost/express-mongo-api_test');
+} else {
+  console.log('Not a test');
+  const db = mongoose.connect('mongodb://localhost/express-mongo-api');
+}
 const port = process.env.PORT || 3000;
 // get a book model
 const Book = require('./models/bookModel');
@@ -25,6 +30,10 @@ app.get('/', (req, res) => {
   res.send('Welcome human');
 });
 
-app.listen(port, () => {
+// returns the server that is listening
+
+app.server = app.listen(port, () => {
   console.log(`Running on port ${port}`);
 });
+
+module.exports = app;

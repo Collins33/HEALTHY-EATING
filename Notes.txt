@@ -10,3 +10,8 @@ Patch replaces one part of the resource
 
 next in the middleware is a function that says that the middleware
 is done with it's processing
+
+Remember:
+close connection after tests
+ensure to use two databases
+
